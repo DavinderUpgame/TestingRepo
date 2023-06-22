@@ -45,19 +45,27 @@ dependencies {
 // Publishing configuration
 publishing {
     repositories {
-        maven {
-            url "file://${project.buildDir}/repo"
-        }
+        maven { url 'https://jitpack.io' }
+
     }
-    publications {
-        aar(MavenPublication) {
-            groupId 'com.upgame.common'
-            artifactId 'common'
-            version '1.0.0'
-            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
-        }
+
+    publications.all {
+        enabled = false
     }
+//    publications {
+//        aar(MavenPublication) {
+//            groupId 'com.upgame.common'
+//            artifactId 'common'
+//            version '1.0.0'
+//            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+//        }
+//    }
 }
 
-// Create a task for publishing the artifact
+
+
+task publishToRemoteRepository {
+    dependsOn 'publish'
+}
+
 
